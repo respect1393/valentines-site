@@ -73,7 +73,7 @@ button:hover {
     color: #ff4e8a;
     padding: 25px;
     border-radius: 20px;
-    max-width: 400px;
+    max-width: 420px;
     width: 100%;
     text-align: center;
     position: relative;
@@ -113,14 +113,35 @@ button:hover {
     cursor: pointer;
     font-weight: bold;
 }
+
+/* Floating hearts animation */
+.floating-heart {
+    position: fixed;
+    bottom: 50%;
+    left: 50%;
+    font-size: 22px;
+    animation: floatUp 3s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translate(-50%, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(-50% + var(--x)), -350px) scale(1.8);
+        opacity: 0;
+    }
+}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-    <h1>For You ❤️</h1>
-    <button class="main-btn" id="openBtn">Click Me</button>
+    <h1>For my dear Bubu ❤️</h1>
+    <button class="main-btn" id="openBtn">Hmet zeuh</button>
 </div>
 
 <!-- Proposal Modal -->
@@ -138,21 +159,32 @@ button:hover {
 <div class="modal" id="wrongModal">
     <div class="card">
         <span class="close-btn" id="closeWrong">✖</span>
-        <p>You chose the wrong answer 😌</p>
+        <p>You chose the wrong answer <br>     Click 'x' and choose again! 😌</p>
     </div>
 </div>
 
 <!-- Final Modal -->
 <div class="modal" id="finalModal">
     <div class="card">
+        <span class="close-btn" id="closeFinal">✖</span>
         <h2>I knew it!! ❤️</h2>
-        <p style="margin-top:15px;">
-            Thank you for being my Valentine.<br><br>
-            I am truly grateful to be able to date you for 
-            <b>3 years and 10 months</b>.<br><br>
-            Thank you for everything you've done for me —
-            your love, support, patience, and belief in me.
-            I’m lucky to have you.
+        <p style="margin-top:15px; line-height:1.6;">
+            Thank you for saying yes and for being my Valentine. ❤️<br><br>
+
+            I am truly grateful to have spent the last 
+            <b>3 years and 10 months</b> loving you, growing with you,
+            and building beautiful memories together.<br><br>
+
+            Thank you for your patience, your kindness, your support 
+            during my stressful days, and for believing in me 
+            even when I doubt myself.<br><br>
+
+            You are not just my girlfriend — you are my peace,
+            my motivation, my comfort, and my favorite person
+            in this entire world.<br><br>
+
+            I promise to keep choosing you, appreciating you,
+            and loving you more with every passing day.
         </p>
     </div>
 </div>
@@ -166,6 +198,7 @@ const openBtn = document.getElementById("openBtn");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const closeWrong = document.getElementById("closeWrong");
+const closeFinal = document.getElementById("closeFinal");
 
 openBtn.addEventListener("click", () => {
     proposalModal.classList.add("active");
@@ -183,7 +216,29 @@ closeWrong.addEventListener("click", () => {
 yesBtn.addEventListener("click", () => {
     proposalModal.classList.remove("active");
     finalModal.classList.add("active");
+    celebrateHearts();
 });
+
+closeFinal.addEventListener("click", () => {
+    finalModal.classList.remove("active");
+});
+
+function celebrateHearts() {
+    for (let i = 0; i < 30; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("floating-heart");
+        heart.innerHTML = "❤️";
+
+        const randomX = (Math.random() - 0.5) * 500 + "px";
+        heart.style.setProperty("--x", randomX);
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 3000);
+    }
+}
 </script>
 
 </body>
