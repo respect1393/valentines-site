@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.main-btn {
+    background: white;
+    color: #ff4e8a;
+}
+
+/* Modal Base */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.card {
+    background: white;
+    color: #ff4e8a;
+    padding: 25px;
+    border-radius: 20px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.btn-group {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.yes-btn {
+    background: #ff4e8a;
+    color: white;
+}
+
+.no-btn {
+    background: #ccc;
+}
+
+.no-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.close-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>For You ❤️</h1>
+    <button class="main-btn" id="openBtn">Click Me</button>
+</div>
+
+<!-- Proposal Modal -->
+<div class="modal" id="proposalModal">
+    <div class="card">
+        <h2>Would you be my Valentine? 💕</h2>
+        <div class="btn-group">
+            <button class="yes-btn" id="yesBtn">Yes, of course ❤️</button>
+            <button class="no-btn" id="noBtn">No</button>
+        </div>
+    </div>
+</div>
+
+<!-- Wrong Answer Modal -->
+<div class="modal" id="wrongModal">
+    <div class="card">
+        <span class="close-btn" id="closeWrong">✖</span>
+        <p>You chose the wrong answer 😌</p>
+    </div>
+</div>
+
+<!-- Final Modal -->
+<div class="modal" id="finalModal">
+    <div class="card">
+        <h2>I knew it!! ❤️</h2>
+        <p style="margin-top:15px;">
+            Thank you for being my Valentine.<br><br>
+            I am truly grateful to be able to date you for 
+            <b>3 years and 10 months</b>.<br><br>
+            Thank you for everything you've done for me —
+            your love, support, patience, and belief in me.
+            I’m lucky to have you.
+        </p>
+    </div>
+</div>
+
+<script>
+const proposalModal = document.getElementById("proposalModal");
+const wrongModal = document.getElementById("wrongModal");
+const finalModal = document.getElementById("finalModal");
+
+const openBtn = document.getElementById("openBtn");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const closeWrong = document.getElementById("closeWrong");
+
+openBtn.addEventListener("click", () => {
+    proposalModal.classList.add("active");
+});
+
+noBtn.addEventListener("click", () => {
+    wrongModal.classList.add("active");
+});
+
+closeWrong.addEventListener("click", () => {
+    wrongModal.classList.remove("active");
+    noBtn.disabled = true;
+});
+
+yesBtn.addEventListener("click", () => {
+    proposalModal.classList.remove("active");
+    finalModal.classList.add("active");
+});
+</script>
+
+</body>
+</html>
